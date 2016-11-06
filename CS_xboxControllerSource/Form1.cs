@@ -29,7 +29,7 @@ namespace CS_xboxControllerSource
 
         int vibrationCountdown = 0;
 
-        public Form1()
+        public Form1() 
         {
             InitializeComponent();
 
