@@ -118,59 +118,14 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="xboxController" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_LEFTbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_LEFTbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_connected" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xboxController_connected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_LeftTrigger3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xboxController_LeftTrigger3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_RightShoulder_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_RightShoulder_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="crosshair_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\crosshair_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_Bbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_Bbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_LeftShoulder_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_LeftShoulder_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_LeftTrigger3_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xboxController_LeftTrigger3_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_Ybutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_Ybutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_RIGHTbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_RIGHTbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_Xbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_Xbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="xboxController_DOWNbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\xbox controller_DOWNbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xboxController_Abutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_Abutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="xboxController_ShowAddressBarButton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_ShowAddressBarButton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xboxController_ShowMenuButton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_ShowMenuButton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_RightTrigger3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xboxController_RightTrigger3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_RightTrigger3_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xboxController_RightTrigger3_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="xboxController_RightStick_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_RightStick_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="xboxController_Xbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_Xbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="xboxController_LeftStick_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\xbox controller_LeftStick_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,7 +133,64 @@
   <data name="xboxController_UPbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\xbox controller_UPbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="xboxController_ShowAddressBarButton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\xbox controller_ShowAddressBarButton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="keyboard_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\keyboard_en.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_RightShoulder_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_RightShoulder_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crosshair_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\crosshair_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_LEFTbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_LEFTbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_ShowMenuButton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_ShowMenuButton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_connected" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xboxController_connected.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_RIGHTbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_RIGHTbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_Bbutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_Bbutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_RightTrigger3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xboxController_RightTrigger3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keyboard_ch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\keyboard_ch.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_Abutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_Abutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_Ybutton_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_Ybutton_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_RightStick_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_RightStick_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_LeftShoulder_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller_LeftShoulder_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xbox controller.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_LeftTrigger3_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xboxController_LeftTrigger3_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_RightTrigger3_press" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xboxController_RightTrigger3_press.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="xboxController_LeftTrigger3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\xboxController_LeftTrigger3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crosshair_keyboard_red" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\crosshair_keyboard_red.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keyboard2_en" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\keyboard2_en.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

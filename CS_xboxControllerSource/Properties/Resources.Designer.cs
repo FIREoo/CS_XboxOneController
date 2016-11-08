@@ -63,9 +63,49 @@ namespace CS_xboxControllerSource.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap crosshair_keyboard_red {
+            get {
+                object obj = ResourceManager.GetObject("crosshair_keyboard_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap crosshair_red {
             get {
                 object obj = ResourceManager.GetObject("crosshair_red", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap keyboard_ch {
+            get {
+                object obj = ResourceManager.GetObject("keyboard_ch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap keyboard_en {
+            get {
+                object obj = ResourceManager.GetObject("keyboard_en", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap keyboard2_en {
+            get {
+                object obj = ResourceManager.GetObject("keyboard2_en", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

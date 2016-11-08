@@ -186,6 +186,18 @@
   <ItemGroup>
     <None Include="xbox controller_ShowAddressBarButton_press.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="keyboard_ch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="crosshair_keyboard_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="keyboard_en.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="keyboard2_en.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
