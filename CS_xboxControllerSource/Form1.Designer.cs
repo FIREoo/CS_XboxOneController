@@ -71,6 +71,7 @@
             this.pictureBox_Ybutton_press = new System.Windows.Forms.PictureBox();
             this.pictureBox_Xbutton_press = new System.Windows.Forms.PictureBox();
             this.pictureBox_xboxController = new System.Windows.Forms.PictureBox();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_keyboard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ShowAddressBarButton_press)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ShowMenuButton_press)).BeginInit();
@@ -117,17 +118,18 @@
             // 
             this.checkBox_mouseEventMode.AutoSize = true;
             this.checkBox_mouseEventMode.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox_mouseEventMode.Location = new System.Drawing.Point(761, 67);
+            this.checkBox_mouseEventMode.Location = new System.Drawing.Point(761, 21);
             this.checkBox_mouseEventMode.Name = "checkBox_mouseEventMode";
             this.checkBox_mouseEventMode.Size = new System.Drawing.Size(173, 24);
             this.checkBox_mouseEventMode.TabIndex = 13;
             this.checkBox_mouseEventMode.Text = "Mouse Event Mode";
             this.checkBox_mouseEventMode.UseVisualStyleBackColor = true;
+            this.checkBox_mouseEventMode.CheckedChanged += new System.EventHandler(this.checkBox_mouseEventMode_CheckedChanged);
             // 
             // textBox_Sensitivity
             // 
             this.textBox_Sensitivity.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.textBox_Sensitivity.Location = new System.Drawing.Point(855, 93);
+            this.textBox_Sensitivity.Location = new System.Drawing.Point(855, 47);
             this.textBox_Sensitivity.Name = "textBox_Sensitivity";
             this.textBox_Sensitivity.Size = new System.Drawing.Size(64, 29);
             this.textBox_Sensitivity.TabIndex = 14;
@@ -136,7 +138,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("微軟正黑體", 12F);
-            this.label1.Location = new System.Drawing.Point(765, 96);
+            this.label1.Location = new System.Drawing.Point(765, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 20);
             this.label1.TabIndex = 15;
@@ -146,7 +148,7 @@
             // 
             this.checkBox_linear.AutoSize = true;
             this.checkBox_linear.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox_linear.Location = new System.Drawing.Point(855, 125);
+            this.checkBox_linear.Location = new System.Drawing.Point(855, 79);
             this.checkBox_linear.Name = "checkBox_linear";
             this.checkBox_linear.Size = new System.Drawing.Size(64, 21);
             this.checkBox_linear.TabIndex = 16;
@@ -157,7 +159,7 @@
             // 
             this.checkBox_keyboardOn.AutoSize = true;
             this.checkBox_keyboardOn.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox_keyboardOn.Location = new System.Drawing.Point(761, 185);
+            this.checkBox_keyboardOn.Location = new System.Drawing.Point(761, 107);
             this.checkBox_keyboardOn.Name = "checkBox_keyboardOn";
             this.checkBox_keyboardOn.Size = new System.Drawing.Size(127, 24);
             this.checkBox_keyboardOn.TabIndex = 13;
@@ -279,7 +281,7 @@
             this.pictureBox_RightTrigger_press.Image = global::CS_xboxControllerSource.Properties.Resources.xboxController_RightTrigger3_press;
             this.pictureBox_RightTrigger_press.Location = new System.Drawing.Point(626, 9);
             this.pictureBox_RightTrigger_press.Name = "pictureBox_RightTrigger_press";
-            this.pictureBox_RightTrigger_press.Size = new System.Drawing.Size(45, 36);
+            this.pictureBox_RightTrigger_press.Size = new System.Drawing.Size(45, 24);
             this.pictureBox_RightTrigger_press.TabIndex = 10;
             this.pictureBox_RightTrigger_press.TabStop = false;
             // 
@@ -297,7 +299,7 @@
             this.pictureBox_LeftTrigger_press.Image = global::CS_xboxControllerSource.Properties.Resources.xboxController_LeftTrigger3_press;
             this.pictureBox_LeftTrigger_press.Location = new System.Drawing.Point(75, 9);
             this.pictureBox_LeftTrigger_press.Name = "pictureBox_LeftTrigger_press";
-            this.pictureBox_LeftTrigger_press.Size = new System.Drawing.Size(45, 42);
+            this.pictureBox_LeftTrigger_press.Size = new System.Drawing.Size(45, 13);
             this.pictureBox_LeftTrigger_press.TabIndex = 10;
             this.pictureBox_LeftTrigger_press.TabStop = false;
             // 
@@ -333,7 +335,7 @@
             // pictureBox_LeftShoulder_press
             // 
             this.pictureBox_LeftShoulder_press.Image = global::CS_xboxControllerSource.Properties.Resources.xboxController_LeftShoulder_press;
-            this.pictureBox_LeftShoulder_press.Location = new System.Drawing.Point(182, 48);
+            this.pictureBox_LeftShoulder_press.Location = new System.Drawing.Point(163, 47);
             this.pictureBox_LeftShoulder_press.Name = "pictureBox_LeftShoulder_press";
             this.pictureBox_LeftShoulder_press.Size = new System.Drawing.Size(155, 60);
             this.pictureBox_LeftShoulder_press.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -403,7 +405,7 @@
             // pictureBox_keyboard_Lpos
             // 
             this.pictureBox_keyboard_Lpos.Image = global::CS_xboxControllerSource.Properties.Resources.crosshair_keyboard_red;
-            this.pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(868, 673);
+            this.pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(837, 622);
             this.pictureBox_keyboard_Lpos.Name = "pictureBox_keyboard_Lpos";
             this.pictureBox_keyboard_Lpos.Size = new System.Drawing.Size(60, 60);
             this.pictureBox_keyboard_Lpos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -413,7 +415,7 @@
             // pictureBox_keyboard_Rpos
             // 
             this.pictureBox_keyboard_Rpos.Image = global::CS_xboxControllerSource.Properties.Resources.crosshair_keyboard_red;
-            this.pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(868, 633);
+            this.pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(837, 556);
             this.pictureBox_keyboard_Rpos.Name = "pictureBox_keyboard_Rpos";
             this.pictureBox_keyboard_Rpos.Size = new System.Drawing.Size(60, 60);
             this.pictureBox_keyboard_Rpos.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -615,6 +617,7 @@
         private System.Windows.Forms.PictureBox pictureBox_keyboard_Lpos;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.IO.Ports.SerialPort serialPort1;
     }
 }
 

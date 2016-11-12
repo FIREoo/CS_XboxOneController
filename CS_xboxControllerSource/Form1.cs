@@ -27,6 +27,7 @@ namespace CS_xboxControllerSource
         //one controller
         PlayerIndex playerIndex = PlayerIndex.One;
 
+
         int vibrationCountdown = 0;
         
         //keyboard
@@ -34,9 +35,7 @@ namespace CS_xboxControllerSource
         System.Drawing.Point const_keyboard_left_point = new System.Drawing.Point(474, 121);
         string onText_R;
         string onText_L;
-        bool click_RShoulder = false;
-        bool click_LShoulder = false;
-        bool click_LStick = false;
+
         bool keyboard_en = true;
 
         public Form1() 
@@ -144,6 +143,7 @@ namespace CS_xboxControllerSource
         private void timer_readController_Tick(object sender, EventArgs e)
         {
             this.CheckVibrationTimeout();
+
             if (checkBox_mouseEventMode.Checked == true)
                 this.UpdateControllerStateWithMouseEvent();
             else if (checkBox_keyboardOn.Checked == true)
@@ -244,38 +244,33 @@ namespace CS_xboxControllerSource
                 pictureBox_Bbutton_press.Visible = (this.gamePadState.Buttons.B == Input.ButtonState.Pressed);
                 pictureBox_LeftStick_press.Visible = (this.gamePadState.Buttons.LeftStick == Input.ButtonState.Pressed);
                 pictureBox_RightStick_press.Visible = (this.gamePadState.Buttons.RightStick == Input.ButtonState.Pressed);
-
-                //Left click
-                if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Pressed)
-                {
-                    pictureBox_LeftShoulder_press.Visible = true;
-                    MouseEvent.LeftDown();
-                }
-                else if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Released)
-                {
-                    pictureBox_LeftShoulder_press.Visible = false;
-                    MouseEvent.LeftUp();
-                }
-                else
-                    pictureBox_LeftShoulder_press.Visible = false;
-
-                //Right click
-                if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Pressed)
-                {
-                    pictureBox_RightShoulder_press.Visible = true;
-                    MouseEvent.RightDown();
-                }
-                else if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Released)
-                {
-                    pictureBox_RightShoulder_press.Visible = false;
-                    MouseEvent.RightUp();
-                }
-                else
-                    pictureBox_RightShoulder_press.Visible = false;
-            
+                pictureBox_LeftShoulder_press.Visible = (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Pressed);
+                pictureBox_RightShoulder_press.Visible = (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Pressed);
                 pictureBox_ShowMenuButton_press.Visible = (this.gamePadState.Buttons.Start == Input.ButtonState.Pressed);
                 pictureBox_ShowAddressBarButton_press.Visible = (this.gamePadState.Buttons.Back == Input.ButtonState.Pressed);
                 pictureBox_controllerConnected.Visible = (this.gamePadState.Buttons.BigButton == Input.ButtonState.Pressed);
+
+                //
+
+                //Left click
+                if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Pressed)
+                    MouseEvent.LeftDown();
+                else if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Released)
+                    MouseEvent.LeftUp();
+
+                //Right click
+                if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Pressed)
+                    MouseEvent.RightDown();
+                else if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Released)
+                    MouseEvent.RightUp();
+
+                //change mode
+                if (this.gamePadState.Buttons.Start == Input.ButtonState.Pressed)
+                {
+                    checkBox_mouseEventMode.Checked = false;
+                    checkBox_keyboardOn.Checked = true;
+                }
+
             }
 
             //Update the position of the thumb sticks
@@ -304,7 +299,6 @@ namespace CS_xboxControllerSource
                 MouseEvent.Move((int)(move_x * sens), -(int)(move_y * sens));
             }
            
-
             pictureBox_Axis2_pos.Location = new System.Drawing.Point(445 + (int)((this.gamePadState.ThumbSticks.Right.X) * 40.0f), 246 - (int)((this.gamePadState.ThumbSticks.Right.Y) * 40f));
 
             //The triggers return a value between 0.0 and 1.0.  I only needed to scale these values for
@@ -321,16 +315,15 @@ namespace CS_xboxControllerSource
             //If the controller is not connected, let the user know
             if (this.gamePadState.IsConnected)
             {
-                ///pictureBox_controllerConnected.Visible = true;
                 pictureBox_Axis1_pos.Visible = true;
                 pictureBox_Axis2_pos.Visible = true;
             }
             else
             {
-                ///pictureBox_controllerConnected.Visible = false;
                 pictureBox_Axis1_pos.Visible = false;
                 pictureBox_Axis2_pos.Visible = false;
             }
+
 
             //I personally prefer to only update the buttons if their state has been changed. 
             if (!this.gamePadState.Buttons.Equals(this.previousState.Buttons))
@@ -346,6 +339,49 @@ namespace CS_xboxControllerSource
                 pictureBox_ShowMenuButton_press.Visible = (this.gamePadState.Buttons.Start == Input.ButtonState.Pressed);
                 pictureBox_ShowAddressBarButton_press.Visible = (this.gamePadState.Buttons.Back == Input.ButtonState.Pressed);
                 pictureBox_controllerConnected.Visible = (this.gamePadState.Buttons.BigButton == Input.ButtonState.Pressed);
+
+                //
+
+                //change mode
+                if (this.gamePadState.Buttons.Start == Input.ButtonState.Pressed)
+                {
+                    checkBox_mouseEventMode.Checked = true;
+                    checkBox_keyboardOn.Checked = false;
+                }
+
+                //change EN CH
+                if (this.gamePadState.Buttons.LeftStick == Input.ButtonState.Pressed)
+                    if (keyboard_en == true)
+                    {
+                        pictureBox_keyboard.Image = CS_xboxControllerSource.Properties.Resources.keyboard2_ch;
+                        SendKeys.SendWait("+");
+                        keyboard_en = false;
+                    }
+                    else
+                    {
+                        pictureBox_keyboard.Image = CS_xboxControllerSource.Properties.Resources.keyboard2_en;
+                        SendKeys.SendWait("+");
+                        keyboard_en = true;
+                    }
+
+                //click to type
+                if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Pressed)
+                    if (onText_R != null)
+                        SendKeys.SendWait(onText_R);
+
+                if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Pressed)
+                    if (onText_L != null)
+                        SendKeys.SendWait(onText_L);
+
+                if (this.gamePadState.Buttons.A == Input.ButtonState.Pressed)
+                    SendKeys.SendWait("{ENTER}");
+                if (this.gamePadState.Buttons.B == Input.ButtonState.Pressed)
+                    SendKeys.SendWait("{ENTER}");
+                if (this.gamePadState.Buttons.X == Input.ButtonState.Pressed)
+                    SendKeys.SendWait("{DELETE}");
+                if (this.gamePadState.Buttons.Y == Input.ButtonState.Pressed)
+                    SendKeys.SendWait("{BACKSPACE}");
+
             }
 
             if (!this.gamePadState.DPad.Equals(this.previousState.DPad))
@@ -389,303 +425,40 @@ namespace CS_xboxControllerSource
             pictureBox_Axis1_pos.Location = new System.Drawing.Point(169 + (int)((this.gamePadState.ThumbSticks.Left.X) * 40.0f), 136 - (int)((this.gamePadState.ThumbSticks.Left.Y) * 40f));
             pictureBox_Axis2_pos.Location = new System.Drawing.Point(445 + (int)((this.gamePadState.ThumbSticks.Right.X) * 40.0f), 246 - (int)((this.gamePadState.ThumbSticks.Right.Y) * 40f));
 
-            //get targit text
-            onText_R = getRightAxisKeyboardText_en(this.gamePadState.ThumbSticks.Right.X, this.gamePadState.ThumbSticks.Right.Y);
-            onText_L = getLeftAxisKeyboardText_en(this.gamePadState.ThumbSticks.Left.X, this.gamePadState.ThumbSticks.Left.Y);
-            
-            //click to type
-            if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Released && click_RShoulder == true)
-                click_RShoulder = false;
-            else if (this.gamePadState.Buttons.RightShoulder == Input.ButtonState.Pressed && click_RShoulder == false)
-            {
-                click_RShoulder = true;
-                if(onText_R != null)
-                SendKeys.SendWait(onText_R);
-            }
-            if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Released && click_LShoulder == true)
-                click_LShoulder = false;
-            else if (this.gamePadState.Buttons.LeftShoulder == Input.ButtonState.Pressed && click_LShoulder == false)
-            {
-                click_LShoulder = true;
-                if (onText_L != null)
-                    SendKeys.SendWait(onText_L);
-            }
-
-            //change EN CH
-            if (this.gamePadState.Buttons.LeftStick == Input.ButtonState.Released && click_LStick == true)
-                click_LStick = false;
-            else if (this.gamePadState.Buttons.LeftStick == Input.ButtonState.Pressed && click_LStick == false)
-            {
-                click_LStick = true;
-                 if (keyboard_en == true)
-                {
-                    pictureBox_keyboard.Image = CS_xboxControllerSource.Properties.Resources.keyboard_ch;
-                    keyboard_en = false;
-                }           
-                 else
-                {
-                    pictureBox_keyboard.Image = CS_xboxControllerSource.Properties.Resources.keyboard_en;
-                    keyboard_en = true;
-                }
-                   
-            }
-
-
-            //The triggers return a value between 0.0 and 1.0.  I only needed to scale these values for
-            //the progress bar
+            //The triggers return a value between 0.0 and 1.0
             this.pictureBox_LeftTrigger_press.Size = new Size(45, (int)((this.gamePadState.Triggers.Left * 67)));
             this.pictureBox_RightTrigger_press.Size = new Size(45, (int)((this.gamePadState.Triggers.Right * 67)));
+
+
+            //get targit text
+            if (keyboard_en == true)
+            {
+                onText_R = getRightAxisKeyboardText_en(this.gamePadState.ThumbSticks.Right.X, this.gamePadState.ThumbSticks.Right.Y);
+                onText_L = getLeftAxisKeyboardText_en(this.gamePadState.ThumbSticks.Left.X, this.gamePadState.ThumbSticks.Left.Y);
+            }
+            else if(keyboard_en == false)
+            {
+                if ((int)(this.gamePadState.Triggers.Right) < 0.1)
+                    onText_R = getRightAxisKeyboardText_ch(this.gamePadState.ThumbSticks.Right.X, this.gamePadState.ThumbSticks.Right.Y);
+                else
+                    onText_R = getRightAxisKeyboardText_outline_ch(this.gamePadState.ThumbSticks.Right.X, this.gamePadState.ThumbSticks.Right.Y);
+
+                if ((int)(this.gamePadState.Triggers.Left) < 0.1)
+                    onText_L = getLeftAxisKeyboardText_ch(this.gamePadState.ThumbSticks.Left.X, this.gamePadState.ThumbSticks.Left.Y);
+                else
+                    onText_L = getLeftAxisKeyboardText_outline_ch(this.gamePadState.ThumbSticks.Left.X, this.gamePadState.ThumbSticks.Left.Y);
+            }
+
+
         }
 
         private String getRightAxisKeyboardText_ch(float value_x, float value_y)
         {
-            if (value_y < 0.3f && value_y > -0.3f)
-            {
-                if (value_x == 0)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(574, const_keyboard_right_point.Y);
-                    return null;
-                }
-                else if (value_x > 0 && value_x <= 0.33f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(608, const_keyboard_right_point.Y);
-                    return "l";
-                }
-                else if (value_x > 0.33f && value_x <= 0.66f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(677, const_keyboard_right_point.Y);
-                    return ";";
-                }
-                else if (value_x > 0.66f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(747, const_keyboard_right_point.Y);
-                    return "{ENTER}";
-                }
-                else if (value_x < 0 && value_x >= -0.33f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(538, const_keyboard_right_point.Y);
-                    return "k";
-                }
-                else if (value_x < -0.33f && value_x >= -0.66f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(469, const_keyboard_right_point.Y);
-                    return "j";
-                }
-                else if (value_x < -0.66 && value_x >= -1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(401, const_keyboard_right_point.Y);
-                    return "h";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-            }
-
-            if (value_y > 0.3)
-            {
-                if (value_x > -0.1f && value_x <= 0.1f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(580, 69);
-                    return "o";
-                }
-                else if (value_x > 0.1f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(648, 69);
-                    return "p";
-                }
-                else if (value_x < -0.1f && value_x >= -0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(511, 69);
-                    return "i";
-                }
-                else if (value_x < -0.4f && value_x >= -0.7f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(442, 69);
-                    return "u";
-                }
-                else if (value_x < -0.7f && value_x >= -1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(373, 69);
-                    return "y";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-            }
-
-            if (value_y < -0.3)
-            {
-                if (value_x > -0.1f && value_x <= 0.1f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(580, 172);
-                    return ",";
-                }
-                else if (value_x > 0.1f && value_x <= 0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(648, 172);
-                    return ".";
-                }
-                else if (value_x > 0.4f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(717, 172);
-                    return "/";
-                }
-                else if (value_x < -0.1f && value_x >= -0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(511, 172);
-                    return "m";
-                }
-                else if (value_x < -0.4f && value_x >= -0.7f)                   
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(442, 172);
-                    return "n";
-                }
-                else if (value_x < -0.7f && value_x >= -1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(373, 172);
-                    return "b";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-
-            }
-            return null;
-        }
-        private String getLeftAxisKeyboardText_ch(float value_x, float value_y)
-        {
-            if (value_y < 0.3f && value_y > -0.3f)
-            {
-                if (value_x == 0)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(160, const_keyboard_right_point.Y);
-                    return null;
-                }
-                else if (value_x > 0 && value_x <= 0.33f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(193, const_keyboard_right_point.Y);
-                    return "d";
-                }
-                else if (value_x > 0.33f && value_x <= 0.66f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(263, const_keyboard_right_point.Y);
-                    return "f";
-                }
-                else if (value_x > 0.66f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(332, const_keyboard_right_point.Y);
-                    return "g";
-                }
-                else if (value_x < 0 && value_x >= -0.33f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(125, const_keyboard_right_point.Y);
-                    return "s";
-                }
-                else if (value_x < -0.33f && value_x >= -0.66f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(55, const_keyboard_right_point.Y);
-                    return "a";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-            }
-
-            if (value_y > 0.3)
-            {
-                if (value_x > -0.1f && value_x <= 0.1f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(165, 69);
-                    return "e";
-                }
-                else if (value_x > 0.1f && value_x <= 0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(235, 69);
-                    return "r";
-                }
-                else if (value_x > 0.4f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(235, 69);
-                    return "t";
-                }
-                else if (value_x < -0.1f && value_x >= -0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(511, 69);
-                    return "w";
-                }
-                else if (value_x < -0.4f && value_x >= -0.7f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(442, 69);
-                    return "q";
-                }
-                else if (value_x < -0.7f && value_x >= -1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(373, 69);
-                    return "y";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-            }
-
-            if (value_y < -0.3)
-            {
-                if (value_x > -0.1f && value_x <= 0.1f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(580, 172);
-                    return ",";
-                }
-                else if (value_x > 0.1f && value_x <= 0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(648, 172);
-                    return ".";
-                }
-                else if (value_x > 0.4f && value_x <= 1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(717, 172);
-                    return "/";
-                }
-                else if (value_x < -0.1f && value_x >= -0.4f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(511, 172);
-                    return "m";
-                }
-                else if (value_x < -0.4f && value_x >= -0.7f)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(442, 172);
-                    return "n";
-                }
-                else if (value_x < -0.7f && value_x >= -1)
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(373, 172);
-                    return "b";
-                }
-                else
-                {
-                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(const_keyboard_right_point.X, const_keyboard_right_point.Y);
-                    return null;
-                }
-
-            }
-            return null;
-        }
-
-        private String getRightAxisKeyboardText_en(float value_x, float value_y)
-        {
             //mid line
-            const int Y_m = 69;
-            const int X_mid_place = 490;
+            const int Y_m = 100;
+            const int X_mid_place = 491;
             const int gap_v = 69;
+            const int gap_h = 51;
             if (value_y < 0.3f && value_y > -0.3f)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -716,7 +489,7 @@ namespace CS_xboxControllerSource
             }
 
             //up line
-            const int Y_u = 69 - 64;
+            const int Y_u = Y_m - gap_h;
             if (value_y > 0.3)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -747,7 +520,7 @@ namespace CS_xboxControllerSource
             }
 
             //down line
-            const int Y_d = 69 + 64;
+            const int Y_d = Y_m + gap_h;
             if (value_y < -0.3)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -778,13 +551,13 @@ namespace CS_xboxControllerSource
             }
             return null;
         }
-
-        private String getLeftAxisKeyboardText_en(float value_x, float value_y)
+        private String getLeftAxisKeyboardText_ch(float value_x, float value_y)
         {
             //mid line
-            const int Y_m = 69;
-            const int X_mid_place = 145;
+            const int Y_m = 100;
+            const int X_mid_place = 146;
             const int gap_v = 69;
+            const int gap_h = 51;
             if (value_y < 0.3f && value_y > -0.3f)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -794,7 +567,7 @@ namespace CS_xboxControllerSource
                 }
                 else if (value_x > 0.15f && value_x <= 0.65f)
                 {
-                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v* 1, Y_m);
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_m);
                     return "f";
                 }
                 else if (value_x > 0.65f && value_x <= 1)
@@ -815,7 +588,7 @@ namespace CS_xboxControllerSource
             }
 
             //up line
-            const int Y_u = 69 - 64;
+            const int Y_u = Y_m - gap_h;
             if (value_y > 0.3)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -846,7 +619,403 @@ namespace CS_xboxControllerSource
             }
 
             //down line
-            const int Y_d = 69 + 64;
+            const int Y_d = Y_m + gap_h;
+            if (value_y < -0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_d);
+                    return "c";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_d);
+                    return "v";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_d);
+                    return "b";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_d);
+                    return "x";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_d);
+                    return "z";
+                }
+            }
+            return null;
+        }
+        private String getRightAxisKeyboardText_outline_ch(float value_x, float value_y)
+        {
+            //mid line outline
+            const int Y_m = 100;
+            const int X_mid_place = 491;
+            const int gap_v = 69;
+            const int gap_h = 51;
+            if (value_y < 0.3f && value_y > -0.3f)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_m);
+                    return "k";
+                }
+                else if (value_x > 0.15f && value_x <= 0.65f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_m);
+                    return "l";
+                }
+                else if (value_x > 0.65f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 3, Y_m - gap_h * 2);
+                    return "-";
+                }
+                else if (value_x < -0.15f && value_x >= -0.65f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_m);
+                    return "j";
+                }
+                else if (value_x < -0.65f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_m);
+                    return "h";
+                }
+            }
+
+            //up line outline
+            const int Y_u = Y_m - gap_h*2;
+            if (value_y > 0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_u);
+                    return "8";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_u);
+                    return "9";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_u);
+                    return "0";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_u);
+                    return "7";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_u);
+                    return "6";
+                }
+            }
+
+            //down line
+            const int Y_d = Y_m + gap_h;
+            if (value_y < -0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_d);
+                    return ",";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_d);
+                    return ".";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_d);
+                    return "/";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_d);
+                    return "m";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_d);
+                    return "n";
+                }
+            }
+            return null;
+        }
+        private String getLeftAxisKeyboardText_outline_ch(float value_x, float value_y)
+        {
+            //mid line
+            const int Y_m = 100;
+            const int X_mid_place = 146;
+            const int gap_v = 69;
+            const int gap_h = 51;
+            if (value_y < 0.3f && value_y > -0.3f)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_m);
+                    return "d";
+                }
+                else if (value_x > 0.15f && value_x <= 0.65f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_m);
+                    return "f";
+                }
+                else if (value_x > 0.65f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_m);
+                    return "g";
+                }
+                else if (value_x < -0.15f && value_x >= -0.65f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_m);
+                    return "s";
+                }
+                else if (value_x < -0.65f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_m);
+                    return "a";
+                }
+            }
+
+            //up line outline
+            const int Y_u = Y_m - gap_h*2;
+            if (value_y > 0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_u);
+                    return "3";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_u);
+                    return "4";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_u);
+                    return "5";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_u);
+                    return "2";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_u);
+                    return "1";
+                }
+            }
+
+            //down line
+            const int Y_d = Y_m + gap_h;
+            if (value_y < -0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_d);
+                    return "c";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_d);
+                    return "v";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_d);
+                    return "b";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_d);
+                    return "x";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_d);
+                    return "z";
+                }
+            }
+            return null;
+        }
+        private String getRightAxisKeyboardText_en(float value_x, float value_y)
+        {
+            //mid line
+            const int Y_m = 69;
+            const int X_mid_place = 490;
+            const int gap_v = 69;
+            const int gap_h = 64;
+            if (value_y < 0.3f && value_y > -0.3f)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_m);
+                    return "k";
+                }
+                else if (value_x > 0.15f && value_x <= 0.65f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_m);
+                    return "l";
+                }
+                else if (value_x > 0.65f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_m);
+                    return ";";
+                }
+                else if (value_x < -0.15f && value_x >= -0.65f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_m);
+                    return "j";
+                }
+                else if (value_x < -0.65f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_m);
+                    return "h";
+                }
+            }
+
+            //up line
+            const int Y_u = Y_m - gap_h;
+            if (value_y > 0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_u);
+                    return "i";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_u);
+                    return "o";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_u);
+                    return "p";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_u);
+                    return "u";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_u);
+                    return "y";
+                }
+            }
+
+            //down line
+            const int Y_d = Y_m + gap_h;
+            if (value_y < -0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place, Y_d);
+                    return ",";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_d);
+                    return ".";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_d);
+                    return "/";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_d);
+                    return "m";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Rpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_d);
+                    return "n";
+                }
+            }
+            return null;
+        }
+        private String getLeftAxisKeyboardText_en(float value_x, float value_y)
+        {
+            //mid line
+            const int Y_m = 69;
+            const int X_mid_place = 145;
+            const int gap_v = 69;
+            const int gap_h = 64;
+            if (value_y < 0.3f && value_y > -0.3f)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_m);
+                    return "d";
+                }
+                else if (value_x > 0.15f && value_x <= 0.65f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v* 1, Y_m);
+                    return "f";
+                }
+                else if (value_x > 0.65f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_m);
+                    return "g";
+                }
+                else if (value_x < -0.15f && value_x >= -0.65f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_m);
+                    return "s";
+                }
+                else if (value_x < -0.65f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_m);
+                    return "a";
+                }
+            }
+
+            //up line
+            const int Y_u = Y_m - gap_h;
+            if (value_y > 0.3)
+            {
+                if (value_x > -0.15f && value_x <= 0.15f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place, Y_u);
+                    return "e";
+                }
+                else if (value_x > 0.15f && value_x <= 0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 1, Y_u);
+                    return "r";
+                }
+                else if (value_x > 0.55f && value_x <= 1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place + gap_v * 2, Y_u);
+                    return "t";
+                }
+                else if (value_x < -0.15f && value_x >= -0.55f)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 1, Y_u);
+                    return "w";
+                }
+                else if (value_x < -0.55f && value_x >= -1)
+                {
+                    pictureBox_keyboard_Lpos.Location = new System.Drawing.Point(X_mid_place - gap_v * 2, Y_u);
+                    return "q";
+                }
+            }
+
+            //down line
+            const int Y_d = Y_m + gap_h;
             if (value_y < -0.3)
             {
                 if (value_x > -0.15f && value_x <= 0.15f)
@@ -879,10 +1048,20 @@ namespace CS_xboxControllerSource
         }
 
 
+        // check box 
+        private void checkBox_mouseEventMode_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox_mouseEventMode.Checked == true)
+            {
+                checkBox_keyboardOn.Checked = false;
+                this.Size = new Size(980, 550);
+            }
+        }
         private void checkBox_keyboardOn_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox_keyboardOn.Checked == true)
             {
+                checkBox_mouseEventMode.Checked = false;
                 this.Size = new Size(980, 820);
             }
             else
@@ -896,6 +1075,8 @@ namespace CS_xboxControllerSource
         private void button1_Click(object sender, EventArgs e)
         {
             pictureBox_keyboard_Rpos.Location = new System.Drawing.Point((int)int.Parse(textBox1.Text), (int)int.Parse(textBox2.Text));
+            //GamePad.SetVibration(playerIndex, 1, 1);
+            vibrationCountdown = 10;
             //Thread.Sleep(1000);
             //SendKeys.SendWait("aa");
         }
@@ -931,6 +1112,8 @@ namespace CS_xboxControllerSource
             textBox1.Text = pictureBox_keyboard_Rpos.Location.X.ToString();
             textBox2.Text = pictureBox_keyboard_Rpos.Location.Y.ToString();
         }
+
+
     }
 
 

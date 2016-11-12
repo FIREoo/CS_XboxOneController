@@ -103,6 +103,16 @@ namespace CS_xboxControllerSource.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap keyboard2_ch {
+            get {
+                object obj = ResourceManager.GetObject("keyboard2_ch", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap keyboard2_en {
             get {
                 object obj = ResourceManager.GetObject("keyboard2_en", resourceCulture);
